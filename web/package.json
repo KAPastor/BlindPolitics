@@ -1,0 +1,14 @@
+{
+  "name": "Signal",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "array-flatten": "^2.1.1",
+    "express": "^4.16.2",
+    "finalhandler": "^1.1.0",
+    "merge-descriptors": "^1.0.1",
+    "python-shell": "^0.4.0"
+  }
+}
