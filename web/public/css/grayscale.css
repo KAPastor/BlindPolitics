@@ -41,7 +41,7 @@ a {
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
-  color: #42DCA3; }
+  color: #FFFFFF; }
   a:focus, a:hover {
     text-decoration: none;
     color: #1d9b6c; }
@@ -226,3 +226,9 @@ img::-moz-selection {
 
 body {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0.2); }
+
+  .twitter_handle{
+    font-size:30px;
+    font-weight:300;
+    color:white;
+  }

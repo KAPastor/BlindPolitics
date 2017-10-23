@@ -9,10 +9,16 @@ function load_tweet(){
       twitter_handle = data.twitter_handle;
       tweet = data.tweet;
 
-      $('.tweet').fadeOut(function(){
-        $('.tweet').html(data['tweet'])
-        $('.tweet').fadeIn();
-      })
+      $('#choices').fadeOut(function(){
+        html_str = '<p class="intro-text tweet">' + tweet + '</p>';
+        html_str = html_str + '<div id="the_buttons" class="row">';
+        html_str = html_str + '<div class="col-lg-4"><a onclick="guess(\'Democrat\')" href="#" class="btn btn-primary btn-lg">DEMOCRAT</a></div>';
+        html_str = html_str + '<div class="col-lg-4 twitter_handle"></div>';
+        html_str = html_str + '<div class="col-lg-4"><a onclick="guess(\'Republican\')" href="#" class="btn btn-danger btn-lg">REPUBLICAN</a></div>';
+        html_str = html_str + '</div>';
+        $('#choices').html(html_str);
+        $('#choices').fadeIn();
+      });
     },
     error: function() {
     }
@@ -21,11 +27,17 @@ function load_tweet(){
 
 function guess(guess){
 
+  $('#the_buttons').fadeOut(function(){
+    html_str = '<div class="col-lg-6 twitter_handle"><a href="https://www.twitter.com/'+twitter_handle+'" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i> @' + twitter_handle + '</a></div>';
+    html_str = html_str + '<div class="col-lg-6"><a onclick="location.reload()" href="#" class="btn btn-info btn-lg">Next Tweet</a></div>';
 
-  $('.twitter_handle').fadeOut(function(){
-    $('.twitter_handle').html('@' + twitter_handle);
-    $('.twitter_handle').fadeIn();
+    $('#the_buttons').html(html_str);
+    $('#the_buttons').fadeIn();
   })
+
+
+
+
   $.getJSON("http://jsonip.com/?callback=?", function (data) {
     //Get the location
           $.ajax('/add_guess', {

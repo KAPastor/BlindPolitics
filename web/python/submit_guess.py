@@ -10,7 +10,7 @@ guess = raw_input("")   # Python 2.x
 location = raw_input("")   # Python 2.x
 
 c = conn.cursor()
-
+tweet = tweet.replace('\'','').replace('\"','')
 # Insert a row of data
 insert_str = "INSERT INTO guess VALUES ('" + party + "','" + Handle + "','" + tweet +"','"  + guess + "','"+ location  + "')"
 c.execute(insert_str)
