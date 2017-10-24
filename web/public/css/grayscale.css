@@ -232,3 +232,18 @@ body {
     font-weight:300;
     color:white;
   }
+
+  .strikeout {
+  font-size: 3em;
+  line-height: 1em;
+  position: relative;
+}
+.strikeout::after {
+  border-bottom: 0.3em solid white;
+  content: "";
+  left: 0;
+  margin-top: calc(0.3em / 2 * -1);
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
