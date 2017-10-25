@@ -4,9 +4,10 @@ from bs4 import BeautifulSoup
 import requests
 import sys
 import json
+import os
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
-
-twitter_handle_path = '../data/TwitterHandles.csv'
+twitter_handle_path = dir_path + '/data/TwitterHandles.csv'
 twitter_handle_data = pd.DataFrame.from_csv(twitter_handle_path,index_col=None)
 
 # Now we have the data in the dataframe, so lets grab a random twitter handle and party name
