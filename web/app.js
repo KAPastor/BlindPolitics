@@ -12,7 +12,7 @@ app.get('/',function(req,res){
 app.get('/load_tweet',function(req,res){
   // Run python
   console.log(__dirname+"/python/get_random_tweet.py")
-  var pyshell = new PythonShell(__dirname+"/python/get_random_tweet.py");
+  var pyshell = new PythonShell(path.join(__dirname+"/python/get_random_tweet.py"));
   pyshell.on('message', function (message) {
     // received a message sent from the Python script (a simple "print" statement)
     console.log(message);
