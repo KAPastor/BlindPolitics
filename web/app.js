@@ -29,12 +29,17 @@ app.get('/',function(req,res){
 
 app.get('/load_tweet',function(req,res){
   // Run python
-  
+
   var pyshell = new PythonShell("get_random_tweet.py",{scriptPath:__dirname+"/python/"});
   pyshell.on('message', function (message) {
     // received a message sent from the Python script (a simple "print" statement)
     console.log(message);
     res.json(message)
+  });
+  // end the input stream and allow the process to exit
+  pyshell.end(function (err) {
+    if (err) throw err;
+    console.log(err);
   });
 });
 
@@ -52,6 +57,12 @@ app.get('/add_guess',function(req,res){
   pyshell.send(tweet);
   pyshell.send(guess);
   pyshell.send(location);
+  // end the input stream and allow the process to exit
+  pyshell.end(function (err) {
+    if (err) throw err;
+    console.log(err);
+  });
+
 
 });
 app.listen(3000);

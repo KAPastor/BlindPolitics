@@ -9,8 +9,17 @@ function load_tweet(){
       twitter_handle = data.twitter_handle;
       tweet = data.tweet;
 
+      // Split the tweet by spaces then http and remove the link.
+      var tweet_split = tweet.split("http");
+      var new_tweet = '';
+      $.each(tweet_split,function(idx,tw){
+        if (tw.indexOf("://") == -1){
+          new_tweet = new_tweet + " " + tw;
+        }
+      })
+
       $('#choices').fadeOut(function(){
-        html_str = '<p class="intro-text tweet">' + tweet + '</p>';
+        html_str = '<p class="intro-text tweet">' + new_tweet + '</p>';
         html_str = html_str + '<div id="the_buttons" class="row">';
         html_str = html_str + '<div class="col-lg-4"><a onclick="guess(\'Democrat\')" href="#" class="btn btn-primary btn-lg">DEMOCRAT</a></div>';
         html_str = html_str + '<div class="col-lg-4 twitter_handle"></div>';
