@@ -43,6 +43,24 @@ app.get('/load_tweet',function(req,res){
   });
 });
 
+
+app.get('/load_stats',function(req,res){
+  // Run python
+
+  var pyshell = new PythonShell("calc_stats.py",{scriptPath:__dirname+"/python/"});
+  pyshell.on('message', function (message) {
+    res.json(message)
+  });
+  // end the input stream and allow the process to exit
+  pyshell.end(function (err) {
+    if (err) throw err;
+    console.log(err);
+  });
+});
+
+
+
+// Here is where we will make the modifications
 app.get('/add_guess',function(req,res){
   party = req.query.party;
   twitter_handle = req.query.twitter_handle;
@@ -50,13 +68,18 @@ app.get('/add_guess',function(req,res){
   guess = req.query.guess;
   location = req.query.location;
 
+  pass_json  = {};
+  pass_json['party'] = party;
+  pass_json['twitter_handle'] = twitter_handle;
+  pass_json['tweet'] = tweet;
+  pass_json['guess'] = guess;
+  pass_json['location'] = location;
+
+
   // Send the python submit guess method
   var pyshell = new PythonShell("submit_guess.py",{scriptPath:__dirname+"/python/"});
-  pyshell.send(party);
-  pyshell.send(twitter_handle);
-  pyshell.send(tweet);
-  pyshell.send(guess);
-  pyshell.send(location);
+  pyshell.send(JSON.stringify(pass_json));
+
   // end the input stream and allow the process to exit
   pyshell.end(function (err) {
     if (err) throw err;
