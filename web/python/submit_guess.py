@@ -6,7 +6,8 @@ import json
 ## TEST:
 # {"party":"Democrat","twitter_handle":"RepBera","tweet":"Hello This is a test","guess":"Democrat","location":"162.247.229.10"}
 
-conn_raw_tweet = sqlite3.connect('C:\Projects\BlindPolitics/data/user_guess.db')
+# conn_raw_tweet = sqlite3.connect('C:\Projects\BlindPolitics/data/user_guess.db')
+conn_raw_tweet = sqlite3.connect('../data/user_guess.db')
 
 pass_json = raw_input("")   # Python 2.x
 pass_json = json.loads(pass_json)
@@ -33,8 +34,8 @@ conn_raw_tweet.commit()
 conn_raw_tweet.close()
 
 # Now for the splitting of the words etc:
-conn_stats = sqlite3.connect('C:\Projects\BlindPolitics/data/twitter_stats.db')
-# conn_stats = sqlite3.connect('../data/twitter_stats.db')
+# conn_stats = sqlite3.connect('C:\Projects\BlindPolitics/data/twitter_stats.db')
+conn_stats = sqlite3.connect('../data/twitter_stats.db')
 
 c_stats = conn_stats.cursor()
 # What we are going to do here is split up the words based on spaces using the methods in collective intellegence

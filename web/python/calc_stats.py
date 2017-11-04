@@ -6,7 +6,8 @@ import sqlite3
 import re
 import json
 
-conn_raw_tweet = sqlite3.connect('C:\Projects\BlindPolitics/data/user_guess.db')
+# conn_raw_tweet = sqlite3.connect('C:\Projects\BlindPolitics/data/user_guess.db')
+conn_raw_tweet = sqlite3.connect('../data/user_guess.db')
 
 data_dict = {}
 
