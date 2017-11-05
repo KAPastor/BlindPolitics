@@ -6,12 +6,17 @@ import sqlite3
 import re
 import json
 
+# conn_t_stats = sqlite3.connect('C:\Projects\BlindPolitics/data/twitter_stats.db')
 # conn_raw_tweet = sqlite3.connect('C:\Projects\BlindPolitics/data/user_guess.db')
+
+conn_t_stats = sqlite3.connect('../data/twitter_stats.db')
 conn_raw_tweet = sqlite3.connect('../data/user_guess.db')
 
 data_dict = {}
 
 c_raw_tweet = conn_raw_tweet.cursor()
+c_t_stats = conn_t_stats.cursor()
+
 # Get the totals...
 q_get_total =  "SELECT COUNT(*) FROM guess"
 c_raw_tweet.execute(q_get_total)
@@ -56,6 +61,21 @@ data_dict['p_wrong_g_dem'] = 1.0-data_dict['p_correct_g_dem']
 
 data_dict['p_correct_g_rep'] = float(num_correct_given_rep[0])/float(total_num_rep[0])
 data_dict['p_wrong_g_rep'] = 1.0-data_dict['p_correct_g_rep']
+
+# I also want the top 20 words from reps and dems
+common_words = "'the','be','to','of','and','a','in','that','is','have','I','it','for','not','on','with','he','as','you','do','at'"
+
+
+rep_words =  "SELECT DISTINCT word,total_guess_num FROM tweet_data WHERE party='Republican' AND word NOT IN ("+common_words+") ORDER BY total_guess_num desc LIMIT 50"
+dem_words =  "SELECT DISTINCT word,total_guess_num FROM tweet_data WHERE party='Democrat' AND word NOT IN ("+common_words+")  ORDER BY total_guess_num desc LIMIT 50"
+
+c_t_stats.execute(rep_words)
+rep_words= c_t_stats.fetchall()
+data_dict['rep_words'] = rep_words
+
+c_t_stats.execute(dem_words)
+dem_words= c_t_stats.fetchall()
+data_dict['dem_words'] = dem_words
 
 
 print json.dumps(data_dict)
