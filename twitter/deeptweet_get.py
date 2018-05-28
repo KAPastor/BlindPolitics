@@ -11,11 +11,6 @@ from keras.preprocessing.text import Tokenizer
 from keras.models import model_from_json
 
 
-proxy = 'https://gateway.bns:8000'
-os.environ['http_proxy'] = proxy
-os.environ['HTTP_PROXY'] = proxy
-os.environ['https_proxy'] = proxy
-os.environ['HTTPS_PROXY'] = proxy
 
 
 
