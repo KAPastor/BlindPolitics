@@ -3,11 +3,7 @@ import os
 import pandas as pd
 import csv
 
-proxy = 'https://gateway.bns:8000'
-os.environ['http_proxy'] = proxy
-os.environ['HTTP_PROXY'] = proxy
-os.environ['https_proxy'] = proxy
-os.environ['HTTPS_PROXY'] = proxy
+
 
 
 api = twitter.Api(consumer_key='e6cWyDszXgWQvCz8Il4xGOSTU',
